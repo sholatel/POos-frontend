@@ -1,7 +1,8 @@
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { crimsonText, oxygen, dmSans, inter, oxygenMono } from "./fonts";
+import '@rainbow-me/rainbowkit/styles.css';
+import Providers from "./providers";
 
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Create Next App",
@@ -9,9 +10,17 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" 
+      className={`${crimsonText.variable} ${oxygen.variable} ${dmSans.variable} ${inter.variable} ${oxygenMono.variable}`}
+    >
+      <body className={`bg-background`}>
+       <Providers>
+        {children}
+       </Providers>
+      </body>
     </html>
   );
 }
+
