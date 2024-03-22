@@ -3,7 +3,7 @@ import { Form, Formik } from "formik";
 import Button from "../components/Button";
 import { Typography } from "../components/MaterialTailwind"
 import * as yup from "yup";
-import React, {useState} from "react"
+import React, { useState } from "react"
 import Input from "@/app/components/Input";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import PasswordInput from "../components/PasswordInput";
@@ -16,22 +16,24 @@ const Login = () => {
     const [submitting, setSubmitting] = useState(false);
 
     const handleLogin = async (values) => {
-    
+
         setSubmitting(true);
 
         try {
             const response = await login(values);
             const result = await response.json();
             if (response.ok) {
-                localStorage.setItem("_poostoken_",result?.token)
-                localStorage.setItem("_isFirstLogin_",result?.isFirstLogin)
-                toast("You have been logged in sucessfully!")
+                if (typeof window !== "undefined") {
+                    localStorage.setItem("_poostoken_",result?.token)
+                    localStorage.setItem("_isFirstLogin_",result?.isFirstLogin)
+                }
+                    toast("You have been logged in sucessfully!")
                 router.replace("/dashboard/manufacturer")
                 setSubmitting(false)
             }
 
             else {
-                
+
                 setSubmitting(false)
                 if (result?.message) {
                     toast.error(result?.message)
@@ -128,7 +130,7 @@ const Login = () => {
                                 />
                                 <ErrorMessage error={errors.password} touched={touched.password} />
                             </div>
-                            <Button className="w-full md:w-[325px]" variant="filled" 
+                            <Button className="w-full md:w-[325px]" variant="filled"
                                 type="submit" loading={submitting}
                             >
                                 <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
