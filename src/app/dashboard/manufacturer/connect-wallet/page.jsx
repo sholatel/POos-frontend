@@ -1,7 +1,7 @@
 "use client"
 import { useAccount } from "wagmi";
 import Header from "../../../components/Header";
-import { Typography } from "./components/MaterialTailwind";
+import { Typography } from "../../../components/MaterialTailwind";
 //import ConnectButton from "./components/ConnectButton";
 import { ConnectButton } from "../../../components/Ranbowkit"
 import { useRouter, useSearchParams } from "next/navigation";
