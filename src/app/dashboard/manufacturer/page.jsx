@@ -2,9 +2,10 @@
 
 import Button from "@/app/components/Button";
 import { Typography } from "../../components/MaterialTailwind";
-import { stats, authentication } from "./data";
+import { stats, authentication, months, authentications } from "./data";
 import { format } from "date-fns";
 import { useRouter } from "next/navigation";
+import AuthCharts from "./AuthChart";
 
 const Dashboard = () => {
     const router = useRouter();
@@ -37,14 +38,18 @@ const Dashboard = () => {
             </div>
 
             {/* Graph */}
-            <div className="w-full flex flex-col rounded-[5px] h-[315px] bg-white mt-[47px] pt-[23px] pl-[37px]"
+            <div className="w-full flex flex-col rounded-[5px] min-h-[315px] bg-white mt-[47px] pt-[23px] pl-[37px]"
                 style={{ boxShadow: "0px 1px 3px 0px #00000014" }}
             >
                 <Typography className="text-primary font-crimsonText font-semibold text-[20px] leading-[26px] text-justify">
                     Authentications
                 </Typography>
-                <div className="flex  items-center justify-center flex-1">
-                    <Typography className="font-crimsonText font-bold text-[20px] leading-[26px]">Coming soon (Chat)</Typography>
+                <div className="">
+                    {/* <Typography className="font-crimsonText font-bold text-[20px] leading-[26px]">Coming soon (Chat)</Typography> */}
+                    <AuthCharts
+                        labels={months}
+                        values={authentications}
+                    />
                 </div>
             </div>
 

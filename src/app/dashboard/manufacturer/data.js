@@ -250,7 +250,12 @@ export const authentication = [
         requester: "",
         status: "failed"
     },
-    
+
 ]
 
+export const months = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+    "July", "Aug", "Sept", "Oct", "Nov", "Dec"
+];
 
+
+export const authentications = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

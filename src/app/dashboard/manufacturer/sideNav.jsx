@@ -2,6 +2,7 @@ import { List, ListItem, ListItemPrefix, ListItemSuffix, Typography } from "../.
 import Button from "@/app/components/Button";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import handleLogout from "@/app/utils/handleLogout";
 
 const SideNav = () => {
     const pathname = usePathname();
@@ -114,7 +115,9 @@ const SideNav = () => {
                 </List>
             </div>
             <div className="flex justify-center">
-                <Button className="w-[189px]" variant="filled" type="submit">
+                <Button className="w-[189px]" variant="filled" type="button"
+                    onClick = {handleLogout}
+                >
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M15 3H9C8.20435 3 7.44129 3.31607 6.87868 3.87868C6.31607 4.44129 6 5.20435 6 6V10H7V6C7 5.46957 7.21071 4.96086 7.58579 4.58579C7.96086 4.21071 8.46957 4 9 4H15C15.5304 4 16.0391 4.21071 16.4142 4.58579C16.7893 4.96086 17 5.46957 17 6V19C17 19.5304 16.7893 20.0391 16.4142 20.4142C16.0391 20.7893 15.5304 21 15 21H9C8.46957 21 7.96086 20.7893 7.58579 20.4142C7.21071 20.0391 7 19.5304 7 19V15H6V19C6 19.7956 6.31607 20.5587 6.87868 21.1213C7.44129 21.6839 8.20435 22 9 22H15C15.7956 22 16.5587 21.6839 17.1213 21.1213C17.6839 20.5587 18 19.7956 18 19V6C18 5.20435 17.6839 4.44129 17.1213 3.87868C16.5587 3.31607 15.7956 3 15 3ZM3 12H13.25L10 8.75L10.66 8L15.16 12.5L10.66 17L10 16.25L13.25 13H3V12Z" fill="#FAFBFD" stroke="#FAFBFD" stroke-width="0.8" />
                     </svg>

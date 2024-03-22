@@ -12,10 +12,12 @@ import {
   lightTheme
 } from '@rainbow-me/rainbowkit';
 import { wagmiConfig } from "./config";
+import { useState } from "react";
 
 
 export default function Providers({ children }) {
   const queryClient = new QueryClient();
+  const [ user, setUser ]  = useState();
 
   return (
    

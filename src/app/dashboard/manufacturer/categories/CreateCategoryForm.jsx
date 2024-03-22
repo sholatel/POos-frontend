@@ -4,14 +4,14 @@ import Input from "@/app/components/Input";
 import ErrorMessage from "@/app/components/ErrorMessage";
 import * as yup from "yup";
 import TextArea from "@/app/components/TextArea";
-import DateInput from "@/app/components/DateInput";
-import Select from "@/app/components/Select";
-import ImagePicker from "@/app/components/ImagePicker";
-import { Typography, IconButton, Option } from "../../../components/MaterialTailwind";
+import { Typography, IconButton } from "../../../components/MaterialTailwind";
 import Button from "@/app/components/Button";
+import { createCategory } from "@/app/actions/product";
+import { useState } from "react";
+import { toast } from "react-toastify";
 
 const CreateCategoryForm = ({ open, setOpen }) => {
-
+    const [submitting, setSubmitting] = useState(false);
     const initialValues = {
         name: "",
         description: "",
@@ -21,6 +21,44 @@ const CreateCategoryForm = ({ open, setOpen }) => {
         name: yup.string().required("This field is required"),
         description: yup.string().required("This field is required"),
     })
+
+    const handleCreateCategory = async (values) => {
+
+        setSubmitting(true);
+        try {
+            const response = await createCategory(values);
+            const result = await response.json();
+            if (response.ok) {
+
+                toast("Category created successfully!")
+                setSubmitting(false)
+                setOpen(false)
+            }
+
+            else {
+
+                setSubmitting(false)
+                if (result?.message) {
+                    toast.error(result?.message)
+                }
+                else {
+                    toast.error("Oops, something went wrong")
+                }
+
+            }
+        }
+
+        catch (err) {
+            console.log("error:", err)
+            setSubmitting(false)
+            if (err?.response?.data?.message) {
+                toast.error(err?.response.data?.message)
+            }
+            else {
+                toast.error("Oops, something went wrong")
+            }
+        }
+    }
 
     return (
         <Modal isOpen={open}
@@ -59,6 +97,7 @@ const CreateCategoryForm = ({ open, setOpen }) => {
                         <Formik
                             initialValues={initialValues}
                             validationSchema={validationSchema}
+                            onSubmit={handleCreateCategory}
                         >
                             {
                                 ({ values, errors, touched, handleBlur, handleChange, setFieldValue }) => (
@@ -112,7 +151,9 @@ const CreateCategoryForm = ({ open, setOpen }) => {
                                             </div>
                                         </div>
                                         <div className="w-full flex ">
-                                            <Button variant="filled" type="submit" className="w-full">
+                                            <Button variant="filled" type="submit" className="w-full"
+                                                loading={submitting}
+                                            >
                                                 <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M20.5 7.423V18.385C20.5 18.845 20.346 19.229 20.038 19.537C19.7293 19.8457 19.345 20 18.885 20H6.115C5.655 20 5.271 19.846 4.963 19.538C4.65433 19.2293 4.5 18.845 4.5 18.385V5.615C4.5 5.155 4.65433 4.771 4.963 4.463C5.271 4.15433 5.655 4 6.115 4H17.077L20.5 7.423ZM19.5 7.85L16.65 5H6.115C5.93567 5 5.78833 5.05767 5.673 5.173C5.55767 5.28833 5.5 5.43567 5.5 5.615V18.385C5.5 18.5643 5.55767 18.7117 5.673 18.827C5.78833 18.9423 5.93567 19 6.115 19H18.885C19.0643 19 19.2117 18.9423 19.327 18.827C19.4423 18.7117 19.5 18.5643 19.5 18.385V7.85ZM12.5 16.538C13.0513 16.538 13.5223 16.3427 13.913 15.952C14.3043 15.5607 14.5 15.0893 14.5 14.538C14.5 13.9867 14.3043 13.5157 13.913 13.125C13.5223 12.7337 13.0513 12.538 12.5 12.538C11.9487 12.538 11.4777 12.7337 11.087 13.125C10.6957 13.5163 10.5 13.9873 10.5 14.538C10.5 15.0887 10.6957 15.56 11.087 15.952C11.4777 16.3427 11.9487 16.538 12.5 16.538ZM7.27 9.77H14.692V6.77H7.27V9.77ZM5.5 7.85V19V5V7.85Z" fill="#FAFBFD" />
                                                 </svg>
