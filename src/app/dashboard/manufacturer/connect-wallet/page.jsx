@@ -1,9 +1,9 @@
 "use client"
 import { useAccount } from "wagmi";
-import Header from "./components/Header";
+import Header from "../../../components/Header";
 import { Typography } from "./components/MaterialTailwind";
 //import ConnectButton from "./components/ConnectButton";
-import { ConnectButton } from "./components/Ranbowkit"
+import { ConnectButton } from "../../../components/Ranbowkit"
 import { useRouter, useSearchParams } from "next/navigation";
 
 export default function ConnectWallet() {
