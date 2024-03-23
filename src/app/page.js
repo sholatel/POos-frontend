@@ -51,7 +51,7 @@ export default function Landing() {
         <div className="px-10 tabletland:pr-0 pl-10 tabletland:pl-[91px]">
           <Typography className="font-crimsonText text-center md:text-justify font-semibold text-[32px] leading-[48px] tabletland:text-[48px] tabletland:leading-[72px] text-[#474935]">
             We want you to be the best you
-            <span ref={el} className="block text-primary" />
+            <span ref={el} className="block text-primary" /> Love u
           </Typography>
         </div>
         <div className=" md:self-end tabletland:self-center md:border md:border-[#47493533] md:rounded-full md:border-dashed relative">
