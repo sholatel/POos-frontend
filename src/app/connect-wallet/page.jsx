@@ -5,8 +5,9 @@ import { Typography, Spinner } from "../components/MaterialTailwind";
 //import ConnectButton from "./components/ConnectButton";
 import { ConnectButton } from "../components/Ranbowkit"
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ConnectWallet() {
+ function ConnectWallet() {
   const { isConnected, isConnecting, isReconnecting } = useAccount()
   const router = useRouter();
   const param = useSearchParams();
@@ -47,4 +48,13 @@ export default function ConnectWallet() {
       </div>
     </main>
   );
+}
+
+
+export default function SuspendedConnectWallet () {
+  return (
+      <Suspense>
+        <ConnectWallet/>
+      </Suspense>
+  )
 }

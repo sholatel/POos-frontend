@@ -1,22 +1,37 @@
-const { useRouter } = require("next/navigation");
+"use client"
+
+
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 
 const RequireAuth = ({ children }) => {
     const router = useRouter();
+    const [isTokenValid, setIsTokenValid] = useState(false);
+
     let token
-    
-    if (typeof window !=="undefined") {
+
+    if (typeof window !== "undefined") {
         token = localStorage.getItem("_poostoken_");
     }
-    
-    if (!token) {
-        router.push("/login")
-        return null;
-    }
+    useEffect(() => {
+        if (!token) {
+            router.push("/login")
+            //return null;
+            //window.history.pushState(null,"","/login")
+        }
+
+        else {
+            setIsTokenValid(true)
+        }
+    }, [])
 
     return (
         <>
-            {children}
+            {
+                isTokenValid ?  children  :
+                    null
+            }
         </>
     )
 }

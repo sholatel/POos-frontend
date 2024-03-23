@@ -5,8 +5,9 @@ import { Typography } from "../../../components/MaterialTailwind";
 //import ConnectButton from "./components/ConnectButton";
 import { ConnectButton } from "../../../components/Ranbowkit"
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function ConnectWallet() {
+ function ConnectWallet() {
   const { isConnected } = useAccount()
   const router = useRouter();
   const param = useSearchParams ();
@@ -40,4 +41,12 @@ export default function ConnectWallet() {
       </div>
     </main>
   );
+}
+
+export default function  SuspensedConnectWallet () {
+  return (
+    <Suspense>
+      <ConnectWallet/>
+    </Suspense>
+  )
 }

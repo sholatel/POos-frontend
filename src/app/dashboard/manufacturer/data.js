@@ -1,6 +1,4 @@
-import { userAgent } from "next/server";
 import ProductImage from "../../assets/images/product.jpeg";
-import { mandala } from "viem/chains";
 
 export const stats = [
     {

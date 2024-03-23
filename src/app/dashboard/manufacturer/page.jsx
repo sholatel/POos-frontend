@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import AuthCharts from "./AuthChart";
 
 const Dashboard = () => {
-    const router = useRouter();
+   // const router = useRouter();
 
     const TABLE_HEAD = ["No", "Product", "Date", "Product ID", "Requester", "Status",]
     const handleViewAll = () => {

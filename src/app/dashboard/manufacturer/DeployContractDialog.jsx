@@ -29,7 +29,7 @@ const DeployContractDialog = () => {
         if ( user && (!(user?.contractAddress) || user?.isFirstTimeLogin)) {
             setOpen(true)
         }
-    }, [window.location.href, user])
+    }, [user])
 
     const handleOpen = () => setOpen(!open);
 
