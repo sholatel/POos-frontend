@@ -35,3 +35,38 @@ export const getCategories = async () => {
         throw err;
     }
 }
+
+
+export const getProducts = async () => {
+    try {
+        const response = await fetch(`${API_URL.DEV_URL}products`, FETCH_INIT())
+        return response;
+    }
+
+    catch (err) {
+        throw err;
+    }
+}
+
+
+export const verifyProduct = async (productId) => {
+    try {
+        const response = await fetch(`${API_URL.DEV_URL}products/${productId}`, FETCH_INIT())
+        return response;
+    }
+
+    catch (err) {
+        throw err;
+    }
+}
+
+export const getCategoriesFromProducts = async () => {
+    try {
+        const response = await fetch(`${API_URL.DEV_URL}products/product-categories`, FETCH_INIT())
+        return response;
+    }
+
+    catch (err) {
+        throw err;
+    }
+}

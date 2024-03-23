@@ -5,6 +5,16 @@ const nextConfig = {
         config.externals.push('pino-pretty', 'lokijs', 'encoding');
         return config;
     },
+    images: {
+        remotePatterns: [
+          {
+            protocol: 'https',
+            hostname: 'res.cloudinary.com',
+            //port: '',
+            //pathname: '/account123/**',
+          },
+        ],
+      },
     
 };
 

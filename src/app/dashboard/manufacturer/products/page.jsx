@@ -1,20 +1,59 @@
 "use client";
 
 import Button from "@/app/components/Button";
-import { Typography } from "../../../components/MaterialTailwind";
-import { products } from "../data";
+import { Spinner, Typography } from "../../../components/MaterialTailwind";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateProductForm from "./CreateProductForm";
+import { getProducts } from "@/app/actions/product";
 
 const Products = () => {
     const [openCreateProductModal, setOpenCreateProductModal] = useState(false);
-
+    const [fetchingProducts, setFetchingProducts] = useState(false)
+    const [products, setProducts] = useState([]);
     const handleAddProduct = () => {
         setOpenCreateProductModal(true);
     }
 
-   
+    useEffect(() => {
+        const fetchProducts = async () => {
+            setFetchingProducts(true)
+            try {
+                const response = await getProducts();
+                const result = await response.json();
+                if (response.ok) {
+                    //console.log("products:", result?.products)
+                    //router.replace("/dashboard/manufacturer")
+                    setFetchingProducts(false)
+                    setProducts(result?.products)
+                }
+
+                else {
+
+                    setFetchingProducts(false)
+                    if (result?.message) {
+                        toast.error(result?.message)
+                    }
+
+                }
+            }
+
+            catch (err) {
+                console.log("error:", err)
+                setFetchingProducts(false)
+                if (err?.response?.data?.message) {
+                    toast.error(err?.response.data?.message)
+                }
+                else {
+                    toast.error("Oops, something went wrong")
+                }
+            }
+        }
+
+        fetchProducts()
+    }, [])
+
+
 
     return (
         <section className="min-h-full ">
@@ -36,38 +75,48 @@ const Products = () => {
                 </Button>
             </div>
             {/* products list */}
-            <div className="flex   flex-row justify-center  gap-x-8 gap-y-8 tabletland:gap-x-[58px] tabletland:gap-y-[58px] mt-20 flex-wrap">
+            <div className="flex   flex-row   gap-x-8 gap-y-8 tabletland:gap-x-[58px] tabletland:gap-y-[58px] mt-20 flex-wrap">
                 {
-                    products?.map((product, index) => (
+                    !fetchingProducts && products?.map((product, index) => (
                         <li key={index} style={{ boxShadow: "0px 1px 3px 0px #00000014" }}
                             className=" bg-white list-none  p-[14px] rounded-[5px] w-full md:w-[209px] h-[260px] space-y-1"
                         >
-                            <Image
-                                src={product?.image}
-                                height={"150px"}
-                                width={"100%"}
-                                className="object-cover h-[150px] w-full rounded-[5px]"
-                            />
+                            <div className="w-full h-[150px] relative">
+                                <Image
+                                    src={product?.imageUrl}
+                                    //height={"150px"}
+                                    //width={100}
+                                    fill={true}
+                                    className="object-cover h-[150px] w-full rounded-[5px]"
+                                />
+                            </div>
                             <Typography className="text-primary mt-[15px] font-bold font-crimsonText text-[18px] leading-[22px] md:text-[20px] md:leading-[26px]">
                                 {product?.name}
                             </Typography>
-                            <Typography className="font-crimsonText mt-[15px] font-semibold break-all text-[16px] leading-[20px] md:text-[18px] md:leading-[26px] text-[#474935]">
-                                {product?.amount_available} available
+                            <Typography className="text-[#47493580] mt-[15px] font-bold font-oxygen text-[14px] leading-[18px] md:text-[16px] md:leading-[20px]">
+                                {product?.quantity} available
                             </Typography>
                             {
-                                product?.price &&
-                                <Typography className="text-[#474935] mt-[15px] font-semibold font-crimsonText text-[18px] leading-[22px] md:text-[20px] md:leading-[26px]">
-                                    ${product?.price}
+                                product?.barcode &&
+                                <Typography className="text-[#47493580] mt-[15px] font-bold font-oxygen text-[14px] leading-[18px] md:text-[16px] md:leading-[20px]">
+                                    {product?.barcode}
                                 </Typography>
                             }
                         </li>
                     ))
                 }
+
+                {
+                    fetchingProducts &&
+                    <div className="w-full flex justify-center">
+                        <Spinner color="#235789" className="h-10 w-10 " />
+                    </div>
+                }
             </div>
 
-           
+
             {/* Create product form */}
-            <CreateProductForm open={openCreateProductModal} 
+            <CreateProductForm open={openCreateProductModal}
                 setOpen={setOpenCreateProductModal}
             />
         </section>

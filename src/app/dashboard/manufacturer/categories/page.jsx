@@ -4,13 +4,54 @@ import Button from "@/app/components/Button";
 import { Typography, Accordion, AccordionBody, AccordionHeader } from "../../../components/MaterialTailwind";
 import { categories } from "../data";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateProductForm from "./CreateCategoryForm";
+import { getCategoriesFromProducts } from "@/app/actions/product";
 
 const Categories = () => {
     const [openCreateCategoryModal, setOpenCreateCategoryModal] = useState(false);
     const [open, setOpen] = useState(1);
     const handleOpen = (value) => setOpen(open === value ? 0 : value);
+    const [fetchingCategory, setFetchingCategory] = useState(false);
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const fetchCategories = async () => {
+            setFetchingCategory(true)
+            try {
+                const response = await getCategoriesFromProducts();
+                const result = await response.json();
+                if (response.ok) {
+                    console.log("products:", result?.categories)
+                    //router.replace("/dashboard/manufacturer")
+                    setFetchingCategory(false)
+                    setCategories(result?.categories)
+                }
+
+                else {
+
+                    setFetchingCategory(false)
+                    if (result?.message) {
+                        toast.error(result?.message)
+                    }
+
+                }
+            }
+
+            catch (err) {
+                console.log("error:", err)
+                setFetchingCategory(false)
+                if (err?.response?.data?.message) {
+                    toast.error(err?.response.data?.message)
+                }
+                else {
+                    toast.error("Oops, something went wrong")
+                }
+            }
+        }
+
+        fetchCategories()
+    }, [])
 
     const handleCreateCategory = () => {
         setOpenCreateCategoryModal(true);
@@ -40,7 +81,7 @@ const Categories = () => {
                             <div className="flex justify-end w-full  items-center space-x-[22px]">
                                 <div className="bg-primary rounded-[10px] p-[5px] h-[31px] flex items-center text-center">
                                     <Typography className="text-white font-oxygenMono text-[16px] leading-[20px]">
-                                        {category?.products.length > 500 ? "500+" : category?.products.length}
+                                        {category?.products?.length > 500 ? "500+" : category?.products?.length}
                                     </Typography>
                                 </div>
                                 <div>
@@ -72,13 +113,13 @@ const Categories = () => {
                                             <Typography className="text-primary mt-[15px] font-bold font-crimsonText text-[18px] leading-[22px] md:text-[20px] md:leading-[26px]">
                                                 {product?.name}
                                             </Typography>
-                                            <Typography className="font-crimsonText mt-[15px] font-semibold break-all text-[16px] leading-[20px] md:text-[18px] md:leading-[26px] text-[#474935]">
+                                            <Typography className="text-[#47493580] mt-[15px] font-bold font-oxygen text-[14px] leading-[18px] md:text-[16px] md:leading-[20px]">
                                                 {product?.amount_available} available
                                             </Typography>
                                             {
-                                                product?.price &&
-                                                <Typography className="text-[#474935] mt-[15px] font-semibold font-crimsonText text-[18px] leading-[22px] md:text-[20px] md:leading-[26px]">
-                                                    ${product?.price}
+                                                product?.barcode &&
+                                                <Typography className="text-[#47493580] mt-[15px] font-bold font-oxygen text-[14px] leading-[18px] md:text-[16px] md:leading-[20px]">
+                                                    {product?.barcode}
                                                 </Typography>
                                             }
                                         </li>

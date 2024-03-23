@@ -40,7 +40,7 @@ export const products = [
     {
         name: "Sprite",
         value: 138,
-        price: 15,
+        barcode: 15,
         amount_available: 500000,
         image: ProductImage,
         category: "drinks",
@@ -50,7 +50,7 @@ export const products = [
     {
         name: "Fanta",
         value: 138,
-        price: 15,
+        barcode: 15,
         amount_available: 500000,
         image: ProductImage,
         category: "drinks",
@@ -59,7 +59,7 @@ export const products = [
     {
         name: "Chapman",
         value: 138,
-        price: 15,
+        barcode: 15,
         amount_available: 500000,
         image: ProductImage,
         category: "drinks",
@@ -68,7 +68,7 @@ export const products = [
     {
         name: "Caprison",
         value: 138,
-        price: 15,
+        barcode: 15,
         amount_available: 500000,
         image: ProductImage,
         category: "drinks",
@@ -85,7 +85,7 @@ export const categories = [
             {
                 name: "Sprite",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -95,7 +95,7 @@ export const categories = [
             {
                 name: "Fanta",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -104,7 +104,7 @@ export const categories = [
             {
                 name: "Chapman",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -113,7 +113,7 @@ export const categories = [
             {
                 name: "Caprison",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -129,7 +129,7 @@ export const categories = [
             {
                 name: "Sprite",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -139,7 +139,7 @@ export const categories = [
             {
                 name: "Fanta",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -148,7 +148,7 @@ export const categories = [
             {
                 name: "Chapman",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -157,7 +157,7 @@ export const categories = [
             {
                 name: "Caprison",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -173,7 +173,7 @@ export const categories = [
             {
                 name: "Sprite",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -183,7 +183,7 @@ export const categories = [
             {
                 name: "Fanta",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -192,7 +192,7 @@ export const categories = [
             {
                 name: "Chapman",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
@@ -201,7 +201,7 @@ export const categories = [
             {
                 name: "Caprison",
                 value: 138,
-                price: 15,
+                barcode: 15,
                 amount_available: 500000,
                 image: ProductImage,
                 category: "drinks",
