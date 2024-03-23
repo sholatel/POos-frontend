@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Typography } from "./MaterialTailwind";
 import Image from "next/image";
-import Product from "../assets/images/product.jpeg"
+
+
 const ImagePicker = (prop) => {
     const [previewUrl, setPreviewUrl] = useState("");
 
@@ -97,11 +98,12 @@ const ImagePicker = (prop) => {
                     </Typography>
                 }
             </div>
-            <div>
+            <div className="relative w-full  md:w-[181px] h-[150px]">
                 <Image
-                    src={Product}
-                    className="w-full  md:w-[181px] h-[150px] rounded-[5px]"
+                    src={previewUrl}
+                    className="rounded-[5px]"
                     alt="Preview"
+                    fill={true}
                 />
             </div>
         </label>

@@ -21,7 +21,7 @@ import { updateUser } from "@/app/actions/auth";
 const DeployContractDialog = () => {
     const [open, setOpen] = React.useState(false);
     const { user, setUser } = React.useContext(userContext);
-    const { writeContract, isPending, reset } = useWriteContract()
+    const { writeContract, isPending, reset, data } = useWriteContract()
     
 
     React.useEffect(() => {
@@ -40,12 +40,13 @@ const DeployContractDialog = () => {
                 address: POOS_FACTORY_CONRACT_ADDRESS,
                 functionName: 'createNewPOoS',
                 args: [
-                    'http://localhost:5000/api/products/{id}',
+                    'https://p-oos-frontend.vercel.app/product-verification/{id}',
                 ],
             },
             {
-                onSuccess: async(data) =>  {
-                    localStorage.setItem("erc_1155_address",data);
+                onSuccess: async(res) =>  {
+                    console.log(`res:${res}, data${data}`)
+                    localStorage.setItem("erc_1155_address",res);
                     //update user data with their smart contract 
                     const payload = { contractAddress:data}
                     const response = await updateUser(payload, user?._id);

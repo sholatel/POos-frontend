@@ -22,7 +22,7 @@ const Categories = () => {
                 const response = await getCategoriesFromProducts();
                 const result = await response.json();
                 if (response.ok) {
-                    console.log("products:", result?.categories)
+                    //console.log("products:", result?.categories)
                     //router.replace("/dashboard/manufacturer")
                     setFetchingCategory(false)
                     setCategories(result?.categories)
@@ -104,17 +104,18 @@ const Categories = () => {
                                         <li key={index} style={{ boxShadow: "0px 1px 3px 0px #00000014" }}
                                             className=" bg-white list-none  p-[14px] rounded-[5px] w-full md:w-[209px] h-[260px] space-y-1"
                                         >
-                                            <Image
-                                                src={product?.image}
-                                                height={"150px"}
-                                                width={"100%"}
-                                                className="object-cover h-[150px] w-full rounded-[5px]"
-                                            />
+                                            <div className="relative w-full h-[150px] ">
+                                                <Image
+                                                    src={product?.imageUrl}
+                                                    fill={true}
+                                                    className="object-cover h-[150px] w-full rounded-[5px]"
+                                                />
+                                            </div>
                                             <Typography className="text-primary mt-[15px] font-bold font-crimsonText text-[18px] leading-[22px] md:text-[20px] md:leading-[26px]">
                                                 {product?.name}
                                             </Typography>
                                             <Typography className="text-[#47493580] mt-[15px] font-bold font-oxygen text-[14px] leading-[18px] md:text-[16px] md:leading-[20px]">
-                                                {product?.amount_available} available
+                                                {product?.quantity} available
                                             </Typography>
                                             {
                                                 product?.barcode &&

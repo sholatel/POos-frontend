@@ -70,3 +70,25 @@ export const getCategoriesFromProducts = async () => {
         throw err;
     }
 }
+
+export const getManufacturerStats = async () => {
+    try {
+        const response = await fetch(`${API_URL.DEV_URL}products/statistics`, FETCH_INIT())
+        return response;
+    }
+
+    catch (err) {
+        throw err;
+    }
+}
+
+export const getAuthentications = async () => {
+    try {
+        const response = await fetch(`${API_URL.DEV_URL}products/product-requests`, FETCH_INIT())
+        return response;
+    }
+
+    catch (err) {
+        throw err;
+    }
+}

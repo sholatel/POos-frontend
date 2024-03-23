@@ -1,16 +1,43 @@
 "use client";
 
-import { useState } from "react";
-import { IconButton, Typography, Menu, MenuHandler, MenuList, MenuItem } from "../../../components/MaterialTailwind";
-import { authentication } from "../data";
+import { useEffect, useState } from "react";
+import { IconButton, Typography, Menu, MenuHandler, MenuList, MenuItem, Spinner, Tooltip } from "../../../components/MaterialTailwind";
 import { format } from "date-fns";
-
+import { LimitDisplayableTexts } from "@/app/utils/LimitDisplayableTexts";
+import { getAuthentications } from "@/app/actions/product";
 const Authentication = () => {
 
     const [filter, setFilter] = useState({
         value: "all",
         label: "All"
     })
+    const [fetchingAuths, setFetchingAuths] = useState(false);
+    const [auths, setAuths] = useState([]);
+
+    useEffect(() => {
+        const fetchAuthentications = async () => {
+            setFetchingAuths(true)
+            try {
+                const response = await getAuthentications();
+                const result = await response.json();
+                if (response.ok) {
+                    setFetchingAuths(false)
+                    setAuths(result?.products)
+                }
+
+                else {
+                    setFetchingAuths(false)
+                }
+            }
+
+            catch (err) {
+                console.log("error:", err)
+                setFetchingAuths(false)
+            }
+        }
+
+        fetchAuthentications();
+    }, [])
 
     const filterOption = [
         {
@@ -120,7 +147,7 @@ const Authentication = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            {authentication.map(({ product, date, requester, id, status }, index) => (
+                            {!fetchingAuths && auths?.map(({  product, createdAt, requester, productId, status }, index) => (
                                 <tr key={product} className="odd:bg-background">
                                     <td className="p-4">
                                         <Typography variant="small" color="blue-gray" className="font-normal">
@@ -134,21 +161,23 @@ const Authentication = () => {
                                     </td>
                                     <td className="p-4">
                                         <Typography variant="small" color="blue-gray" className="font-normal">
-                                            {format(date, "P")}
+                                            {format(createdAt, "P")}
                                         </Typography>
                                     </td>
                                     <td className="p-4">
                                         <Typography variant="small" color="blue-gray" className="font-normal">
-                                            {id}
+                                            {productId}
                                         </Typography>
                                     </td>
                                     <td className="p-4">
-                                        <Typography variant="small" color="blue-gray" className="font-medium">
-                                            {requester ? requester : "-"}
-                                        </Typography>
+                                        <Tooltip content={requester}>
+                                            <Typography variant="small" color="blue-gray" className="font-medium">
+                                                {requester ? LimitDisplayableTexts(requester,10) : "-"}
+                                            </Typography>
+                                        </Tooltip>
                                     </td>
                                     <td className="p-4">
-                                        <div className={`${status === "passed" ? "bg-[#FFD7D7] text-[#ED5B75] " : "text-[#4FDFB1] bg-[#DCFCE7]"} rounded-[5px] p-[5px] w-fit text-center capitalize font-oxygen text-[14px] leading-[17px] `}>
+                                        <div className={`${status === "failed" ? "bg-[#FFD7D7] text-[#ED5B75] " : "text-[#4FDFB1] bg-[#DCFCE7]"} rounded-[5px] p-[5px] w-fit text-center capitalize font-oxygen text-[14px] leading-[17px] `}>
                                             {status}
                                         </div>
                                     </td>
@@ -156,6 +185,12 @@ const Authentication = () => {
                             ))}
                         </tbody>
                     </table>
+                    {
+                        fetchingAuths &&
+                        <div className="mt-5 w-full flex flex-1 items-center justify-center">
+                            <Spinner className="h-6 w-6" />
+                        </div>
+                    }
                 </div>
             </div>
 

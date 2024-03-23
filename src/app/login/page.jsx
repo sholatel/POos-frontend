@@ -24,6 +24,7 @@ const Login = () => {
             const result = await response.json();
             if (response.ok) {
                 if (typeof window !== "undefined") {
+                    //alert("Hello")
                     localStorage.setItem("_poostoken_",result?.token)
                     localStorage.setItem("_isFirstLogin_",result?.isFirstLogin)
                 }
