@@ -17,6 +17,7 @@ import { POOS_FACTORY_CONRACT_ADDRESS } from "@/app/config";
 import abi from "@/app/utils/abi";
 import { toast } from "react-toastify";
 import { updateUser } from "@/app/actions/auth";
+import { getTransactionReceipt } from 'wagmi/actions'
 
 
 
@@ -26,6 +27,7 @@ const DeployContractDialog = () => {
     const { writeContract, isPending, reset, data, } = useWriteContract()
     const { address, } = useAccount();
     const [confirming, setConfirming] = useState(false);
+    const config = useConfig()
 
     useWatchContractEvent({
         address: POOS_FACTORY_CONRACT_ADDRESS,
@@ -69,8 +71,26 @@ const DeployContractDialog = () => {
             },
             {
                 onSuccess: async (res, variable) => {
-                    setConfirming(true)
+                    //setConfirming(true);
+                    // const result = setInterval(async ()=>{
+                    //     try {
+                    //         const result = await getTransactionReceipt(config, {
+                    //             hash: res,
+                    //           })
+                    //          console.log("Deployment result:",result?.logs[0]?.address)
+                    //          const address = result?.logs[0]?.address
+                    //          if (address) {
+                    //             clearInterval(result)
+                    //          }
+                    //     }
+
+                    //     catch (err) {
+                    //         console.log(err);
+                    //     }
+                    // },3000)
+
                 },
+
 
                 onError: (err) => {
                     console.log("Error", err)
