@@ -29,26 +29,26 @@ const DeployContractDialog = () => {
     const [confirming, setConfirming] = useState(false);
     const config = useConfig()
 
-    useWatchContractEvent({
-        address: POOS_FACTORY_CONRACT_ADDRESS,
-        abi,
-        eventName: 'NewPOoSTokenCreated', 
-        onLogs: async (logs)=> {
-            console.log("logs:",logs)
-          if (logs[0].args[2]===address) {
-            //update user data with their smart contract 
-            const payload = { contractAddress:logs[0].args[0] }
-            const response = await updateUser(payload, user?._id);
-            const result = await response.json();
-            setUser(result?.singleUser);
-            //setOpen(false)
-            toast.success("Congratulations! Your contract has been deployed. You can now mint the digitalized token of your product on the blockchain")
-            setOpen(false)
-          }
-        },
-      })
-    
-    
+    // useWatchContractEvent({
+    //     address: POOS_FACTORY_CONRACT_ADDRESS,
+    //     abi,
+    //     eventName: 'NewPOoSTokenCreated', 
+    //     onLogs: async (logs)=> {
+    //         console.log("logs:",logs)
+    //       if (logs[0].args[2]===address) {
+    //         //update user data with their smart contract 
+    //         const payload = { contractAddress:logs[0].args[0] }
+    //         const response = await updateUser(payload, user?._id);
+    //         const result = await response.json();
+    //         setUser(result?.singleUser);
+    //         //setOpen(false)
+    //         toast.success("Congratulations! Your contract has been deployed. You can now mint the digitalized token of your product on the blockchain")
+    //         setOpen(false)
+    //       }
+    //     },
+    //   })
+
+
 
     React.useEffect(() => {
 
@@ -59,8 +59,8 @@ const DeployContractDialog = () => {
 
     const handleOpen = () => setOpen(!open);
 
-    const deployERC1155 = async  () => {
-         writeContract(
+    const deployERC1155 = async () => {
+        writeContract(
             {
                 abi,
                 address: POOS_FACTORY_CONRACT_ADDRESS,
@@ -71,23 +71,30 @@ const DeployContractDialog = () => {
             },
             {
                 onSuccess: async (res, variable) => {
-                    //setConfirming(true);
-                    // const result = setInterval(async ()=>{
-                    //     try {
-                    //         const result = await getTransactionReceipt(config, {
-                    //             hash: res,
-                    //           })
-                    //          console.log("Deployment result:",result?.logs[0]?.address)
-                    //          const address = result?.logs[0]?.address
-                    //          if (address) {
-                    //             clearInterval(result)
-                    //          }
-                    //     }
+                    setConfirming(true);
+                    const intervalResult = setInterval(async () => {
+                        try {
+                            const result = await getTransactionReceipt(config, {
+                                hash: res,
+                            })
+                            //console.log("Deployment result:", result?.logs[0]?.address)
+                            const address = result?.logs[0]?.address
+                            if (address) {
+                                const payload = { contractAddress: address }
+                                const response = await updateUser(payload, user?._id);
+                                const result = await response.json();
+                                setUser(result?.singleUser);
+                                setOpen(false)
+                                toast.success("Congratulations! Your contract has been deployed. You can now mint the digitalized token of your product on the blockchain")
+                                setOpen(false)
+                                clearInterval(intervalResult)
+                            }
+                        }
 
-                    //     catch (err) {
-                    //         console.log(err);
-                    //     }
-                    // },3000)
+                        catch (err) {
+                            console.log(err);
+                        }
+                    }, 3000)
 
                 },
 
@@ -114,8 +121,8 @@ const DeployContractDialog = () => {
                                 <Spinner color="#235789" className="h-10 w-10" />
                                 <Typography className="mt-6 font-oxygen font-normal  text-center text-[16px] leading-[19px] md:text-[20px]  md:leading-[25px] text-[#474935]">
                                     {
-                                        !confirming  ? "Please wait, deployment process started" :
-                                        "Deployment successful! Please wait for confirmation."
+                                        !confirming ? "Please wait, deployment process started" :
+                                            "Deployment successful! Please wait for confirmation."
                                     }
                                 </Typography>
                             </div> :
@@ -129,9 +136,9 @@ const DeployContractDialog = () => {
                     {
                         !confirming &&
                         <Button
-                        variant="text"
-                        onClick={!isPending ? handleOpen : () => reset()}
-                        className="mr-1"
+                            variant="text"
+                            onClick={!isPending ? handleOpen : () => reset()}
+                            className="mr-1"
                         >
                             <span>Cancel</span>
                         </Button>
@@ -146,7 +153,7 @@ const DeployContractDialog = () => {
             </Dialog>
         </>
     );
-                }
+}
 
 
 export default DeployContractDialog;
