@@ -99,7 +99,7 @@ const ProductDetails = () => {
                                     <div className="flex items-center justify-center space-y-[70px] md:space-y-0 md:space-x-[70px] tabletland:space-x-[150px] lg:space-x-[224px] w-full h-screen flex-col md:flex-row flex-1 px-10 tabletland:px-[91px] mt-[102px] md:mt-0">
 
                                         <div className=" bg-white relative  flex flex-col ">
-                                            <div className="relative w-[80%] tabletland:w-[409px] h-[350px] rotate-[-34.14deg] self-end">
+                                            <div className="relative w-[80%] tabletland:w-[409px] h-[350px] self-end">
                                                 <Image
                                                     src={product?.imageUrl}
                                                     //width={409}
