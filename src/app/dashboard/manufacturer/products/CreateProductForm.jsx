@@ -124,7 +124,7 @@ const CreateProductForm = ({ open, setOpen }) => {
                     {
                         onSuccess: async (data) => {
                             toast("Your product have been created and minted as token  successfully!")
-                            const url = await QRCode.toDataURL(`http://localhost:3001/product-verification/${result?.product?.productId}`)
+                            const url = await QRCode.toDataURL(`https://p-oos-frontend.vercel.app/product-verification/${result?.product?.productId}`)
                             setQr(url)
                             setSubmitting(false)
                             //setOpen(false)

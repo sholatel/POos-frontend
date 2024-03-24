@@ -11,7 +11,7 @@ import {
 export const wagmiConfig = getDefaultConfig({
     appName: 'PoOs',
     projectId: 'df01c1b1561c6373ef84c87b27c8ea8c',
-    chains: [mainnet, arbitrum, arbitrumSepolia, arbitrumGoerli, sepolia, goerli],
+    chains: [ arbitrumSepolia,],
     ssr: true, // If your dApp uses server side rendering (SSR
 });
 
