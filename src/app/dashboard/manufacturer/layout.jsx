@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import WalletLogo from "../../assets/images/wallet_logo.svg";
-import { useAccount, useBalance } from "wagmi";
+import { useAccount, useBalance, useWatchContractEvent } from "wagmi";
 import formatWalletAddres
     from "../../utils/formatWalletAddress";
 import { Typography } from "../../components/MaterialTailwind";
@@ -15,6 +15,8 @@ import RequireAuth from "@/app/wrapper/RequireAuth";
 import { getUser } from "@/app/actions/auth";
 import DeployContractDialog from "./DeployContractDialog";
 import { toast } from "react-toastify";
+import { POOS_FACTORY_CONRACT_ADDRESS } from "@/app/config";
+import abi from "@/app/utils/abi";
 
 const DashboardLayout = ({ children }) => {
     const { isConnected, address, } = useAccount();
@@ -24,6 +26,8 @@ const DashboardLayout = ({ children }) => {
 
     const [ user, setUser ] = useState(null);
     const [fetching, setFetching] = useState(false)
+
+    
 
     useEffect(()=>{
         const fetchUser = async ()=> {

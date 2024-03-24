@@ -12,7 +12,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
+  
   return (
     <html lang="en"
       className={`${crimsonText.variable} ${oxygen.variable} ${dmSans.variable} ${inter.variable} ${oxygenMono.variable}`}

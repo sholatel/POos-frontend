@@ -12,6 +12,7 @@ import Image from "next/image"
 export default function Landing() {
   const el = useRef(null);
   const router = useRouter();
+  
 
   useEffect(() => {
     const typed = new Typed(el.current, {
