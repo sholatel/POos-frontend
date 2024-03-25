@@ -41,6 +41,7 @@ const VerifyAccount = () => {
                     toast.error(err?.response.data?.message)
                 }
                 console.log(err)
+                toast.error("Failed to verify your account. Please reach out to our support to log your issues")
             }
         }
         _verifyAccount();

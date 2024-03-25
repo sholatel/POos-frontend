@@ -9,7 +9,8 @@ import {
     PopoverHandler,
     PopoverContent, Accordion, AccordionBody, AccordionHeader,
     Menu,MenuHandler,MenuList,MenuItem, Spinner, DialogBody,
-    DialogFooter, DialogHeader, Tooltip} from "@material-tailwind/react";
+    DialogFooter, DialogHeader, Tooltip, Alert,
+    } from "@material-tailwind/react";
 
 
 export { 
@@ -21,5 +22,6 @@ export {
     Textarea, Popover, PopoverHandler, PopoverContent ,
     Accordion, AccordionBody, AccordionHeader, Menu,
     MenuHandler,MenuList,MenuItem, Spinner,
-    DialogBody, DialogFooter, DialogHeader, Tooltip
+    DialogBody, DialogFooter, DialogHeader, Tooltip,
+    Alert, 
 };

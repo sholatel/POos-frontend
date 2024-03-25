@@ -21,8 +21,8 @@ import { getTransactionReceipt } from 'wagmi/actions'
 
 
 
-const DeployContractDialog = () => {
-    const [open, setOpen] = React.useState(false);
+const DeployContractDialog = ({open, setOpen}) => {
+    
     const { user, setUser } = React.useContext(userContext);
     const { writeContract, isPending, reset, data, } = useWriteContract()
     const { address, } = useAccount();
