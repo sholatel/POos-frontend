@@ -27,7 +27,7 @@ export const login = async (payload) => {
 
 export const verifyAccount = async (token) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user/verify-email/${token}`, FETCH_JSON_INIT())
+        const response = await fetch(`${API_URL.PROD_URL}register-user/verify-email/${token}`, FETCH_INIT())
         return response;
     }
 
