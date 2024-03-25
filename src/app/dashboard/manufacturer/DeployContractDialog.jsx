@@ -66,7 +66,7 @@ const DeployContractDialog = ({open, setOpen}) => {
                 address: POOS_FACTORY_CONRACT_ADDRESS,
                 functionName: 'createNewPOoS',
                 args: [
-                    'https://poos.netlify.app/product-verification/{id}',
+                    'https://p-oos-frontend.vercel.app/product-verification/{id}',
                 ],
             },
             {
