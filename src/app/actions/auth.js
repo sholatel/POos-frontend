@@ -5,7 +5,7 @@ import { API_URL, FETCH_INIT, FETCH_JSON_INIT } from "../config";
 
 export const register = async (payload) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user`, FETCH_JSON_INIT(payload))
+        const response = await fetch(`${API_URL.API_URL}register-user`, FETCH_JSON_INIT(payload))
         return response;
     }
 
@@ -16,7 +16,7 @@ export const register = async (payload) => {
 
 export const login = async (payload) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}login`, FETCH_JSON_INIT(payload))
+        const response = await fetch(`${API_URL.API_URL}login`, FETCH_JSON_INIT(payload))
         return response;
     }
 
@@ -27,7 +27,7 @@ export const login = async (payload) => {
 
 export const verifyAccount = async (token) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user/verify-email/${token}`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}register-user/verify-email/${token}`, FETCH_INIT())
         return response;
     }
 
@@ -38,7 +38,7 @@ export const verifyAccount = async (token) => {
 
 export const requestVerificationLink = async (payload) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user/verify-email`, FETCH_JSON_INIT(payload))
+        const response = await fetch(`${API_URL.API_URL}register-user/verify-email`, FETCH_JSON_INIT(payload))
         return response;
     }
 
@@ -51,7 +51,7 @@ export const requestVerificationLink = async (payload) => {
 
 export const getUser = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}register-user`, FETCH_INIT())
         return response;
     }
 
@@ -62,7 +62,7 @@ export const getUser = async () => {
 
 export const updateUser = async (payload, userId) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}register-user/${userId}`, FETCH_JSON_INIT(payload, "PUT"))
+        const response = await fetch(`${API_URL.API_URL}register-user/${userId}`, FETCH_JSON_INIT(payload, "PUT"))
         return response;
     }
 

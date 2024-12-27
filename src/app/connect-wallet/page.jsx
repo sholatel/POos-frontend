@@ -6,20 +6,32 @@ import { Typography, Spinner } from "../components/MaterialTailwind";
 import { ConnectButton } from "../components/Ranbowkit"
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense } from "react";
+import { useEffect } from "react";
 
  function ConnectWallet() {
   const { isConnected, isConnecting, isReconnecting } = useAccount()
   const router = useRouter();
   const param = useSearchParams();
 
-  if (isConnected) {
-    if (param.get("action") === "login") {
-      router.replace("login")
+  //console.log("Wallet connection:", isConnected, isConnecting, isReconnecting)
+  useEffect(() => { 
+    if (isConnected) {
+      if (param.get("action") === "login") {
+        router.replace("login")
+      }
+      else if (param.get("action") === "register") {
+        router.replace("signup")
+      }
     }
-    else if (param.get("action") === "register") {
-      router.replace("signup")
-    }
-  }
+  }, [isConnected, isConnecting, isReconnecting])
+  // if (isConnected) {
+  //   if (param.get("action") === "login") {
+  //     router.replace("login")
+  //   }
+  //   else if (param.get("action") === "register") {
+  //     router.replace("signup")
+  //   }
+  // }
 
 
   return (

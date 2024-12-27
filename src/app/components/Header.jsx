@@ -32,7 +32,7 @@ const Header = () => {
                         </div>
                         <div className="flex flex-col space-y-1">
                             <Typography className="text-[#474935] font-semibold font-inter text-[16px] leading-[24px]">
-                                {result?.isFetched ? Number(result.data.formatted).toFixed(6) : ""} <span> {result?.isFetched ? result.data.symbol : ""}</span>
+                                {result?.isFetched ? Number(result?.data?.formatted).toFixed(6) : ""} <span> {result?.isFetched ? result?.data?.symbol : ""}</span>
                             </Typography>
                             <Typography className="text-primary text-[12px] leading-[12px] font-inter">
                                 {formatWalletAddres(address)}

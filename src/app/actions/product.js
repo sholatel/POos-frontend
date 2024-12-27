@@ -5,7 +5,7 @@ import { API_URL, FETCH_FORMDATA_INIT, FETCH_INIT, FETCH_JSON_INIT } from "../co
 
 export const createProduct = async (formData) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products`, FETCH_FORMDATA_INIT(formData))
+        const response = await fetch(`${API_URL.API_URL}products`, FETCH_FORMDATA_INIT(formData))
         return response;
     }
 
@@ -16,7 +16,7 @@ export const createProduct = async (formData) => {
 
 export const createCategory = async (payload) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/create-category`, FETCH_JSON_INIT(payload))
+        const response = await fetch(`${API_URL.API_URL}products/create-category`, FETCH_JSON_INIT(payload))
         return response;
     }
 
@@ -27,7 +27,7 @@ export const createCategory = async (payload) => {
 
 export const getCategories = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/categories`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products/categories`, FETCH_INIT())
         return response;
     }
 
@@ -39,7 +39,7 @@ export const getCategories = async () => {
 
 export const getProducts = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products`, FETCH_INIT())
         return response;
     }
 
@@ -51,7 +51,7 @@ export const getProducts = async () => {
 
 export const verifyProduct = async (productId) => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/${productId}`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products/${productId}`, FETCH_INIT())
         return response;
     }
 
@@ -62,7 +62,7 @@ export const verifyProduct = async (productId) => {
 
 export const getCategoriesFromProducts = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/product-categories`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products/product-categories`, FETCH_INIT())
         return response;
     }
 
@@ -73,7 +73,7 @@ export const getCategoriesFromProducts = async () => {
 
 export const getManufacturerStats = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/statistics`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products/statistics`, FETCH_INIT())
         return response;
     }
 
@@ -84,7 +84,7 @@ export const getManufacturerStats = async () => {
 
 export const getAuthentications = async () => {
     try {
-        const response = await fetch(`${API_URL.PROD_URL}products/product-requests`, FETCH_INIT())
+        const response = await fetch(`${API_URL.API_URL}products/product-requests`, FETCH_INIT())
         return response;
     }
 

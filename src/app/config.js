@@ -1,27 +1,30 @@
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
 import {
-    mainnet,
-    arbitrum,
-    arbitrumSepolia,
-    arbitrumGoerli,
-    sepolia,
-    goerli
+    //mainnet,
+    //arbitrum,
+    //arbitrumSepolia,
+    //arbitrumGoerli,
+    //sepolia,
+    //goerli,
 } from 'wagmi/chains';
+import { neoX } from "./Data/chains";
+
 
 export const wagmiConfig = getDefaultConfig({
     appName: 'PoOs',
     projectId: 'df01c1b1561c6373ef84c87b27c8ea8c',
-    chains: [ arbitrumSepolia,],
+    //chains: [ sepolia ],
+    chains: [ neoX ],
     ssr: true, // If your dApp uses server side rendering (SSR
 });
 
 
 export const API_URL = {
-    DEV_URL: "http://localhost:3000/api/",
-    PROD_URL: "https://y2sm8pjvyv.us-east-1.awsapprunner.com/api/",
+    API_URL: process.env.NODE_ENV === "development" ? "http://localhost:5000/api/" : "https://y2sm8pjvyv.us-east-1.awsapprunner.com/api/",
+    //PROD_URL: "https://y2sm8pjvyv.us-east-1.awsapprunner.com/api/",
 }
 
-export const POOS_FACTORY_CONRACT_ADDRESS = "0x3C78D6B9978dB83723f4Aaa0FE27100f0762A3c6"//"0xE1Fa53c9858FD7d08CFDF4335c189c94a3aA32B5" // "0xE1Fa53c9858FD7d08CFDF4335c189c94a3aA32B5"
+export const POOS_FACTORY_CONRACT_ADDRESS = "0x8f2C0Ee732B384C1CACCacD300421ACB26FD233b"//"0xE1Fa53c9858FD7d08CFDF4335c189c94a3aA32B5" // "0xE1Fa53c9858FD7d08CFDF4335c189c94a3aA32B5"
 
 
 export const FETCH_JSON_INIT = (payload = {}, method = "POST", contentType = "application/json") => {
